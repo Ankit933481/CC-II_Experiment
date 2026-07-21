@@ -1,0 +1,46 @@
+Experiment-1.1(LeetCode problem 217)
+
+Aim:- Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+Algorithm:-
+Initialize an empty hash set seen.
+Iterate through each element num in nums:
+If num already exists in seen, return True.
+Otherwise, insert num into seen.
+Return False if the loop finishes without finding duplicates.
+
+Code:
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        nums.sort()
+        for i in range(1,len(nums)):
+            if nums[i]==nums[i-1]:
+                return True
+        return False
+
+
+Experiment-1.2(LeetCode Problem 219)
+
+Aim:-Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+Alogorithm:-
+Create an empty dictionary num to store each element and its latest index.
+Traverse the array nums from index 0 to n-1.
+For each element nums[i]:
+Check if the element already exists in the dictionary.
+If it exists, calculate the distance between the current index and the previously stored index.
+If the distance is less than or equal to k, return True.
+Update the dictionary by storing the current index of the element:
+num[nums[i]] = i
+Continue until all elements are processed.
+If no valid duplicate is found, return False.
+
+Code:
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        num={}
+        for i in range(0,len(nums)):
+            if nums[i] in num and abs(i-num[nums[i]])<=k:
+                return True
+            num[nums[i]]=i
+        return False
