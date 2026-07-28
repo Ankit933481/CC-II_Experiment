@@ -1,0 +1,58 @@
+Experiment -1.3(LeetCode Problem 232)
+
+Aim:-Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).
+
+Algorithm:
+1. Initialization
+Initialize two empty stacks: inputStack = [] and outputStack = [].
+
+2. Push Operation (push(x))
+Append element x directly to inputStack.
+
+3. Transfer Sub-routine (Used by pop and peek)
+Check if outputStack is empty:
+
+If empty:
+
+While inputStack has elements:
+
+Pop the top element from inputStack.
+
+Push (append) that element onto outputStack.
+
+If not empty: Proceed directly (the top of outputStack is already the oldest element in the queue).
+
+4. Pop Operation (pop())
+Execute the Transfer Sub-routine.
+
+Pop and return the top element from outputStack.
+
+5. Peek Operation (peek())
+Execute the Transfer Sub-routine.
+
+Inspect and return the top element of outputStack without removing it.
+
+6. Empty Operation (empty())
+Return True if both inputStack and outputStack are empty; otherwise, return False.
+
+Code:
+
+class MyQueue :
+    def __init__(self):
+        self.inputStack=[]
+        self.outputStack=[]
+    def push(self, x: int) -> None:
+        self.inputStack.append(x)
+    def pop(self) -> int:
+        if not self.outputStack:
+            while len(self.inputStack)>0:
+                self.outputStack.append(self.inputStack.pop())
+        return self.outputStack.pop()
+    def peek(self) -> int:
+        if not self.outputStack:
+            while len(self.inputStack)>0:
+                self.outputStack.append(self.inputStack.pop())
+        return self.outputStack[-1]
+
+    def empty(self) -> bool:
+        return not self.inputStack and not self.outputStack
