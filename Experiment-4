@@ -1,0 +1,55 @@
+Experiment 1.4(Leetcode No 876)
+Aim:-Given the head of a singly linked list, return the middle node of the linked list.
+If there are two middle nodes, return the second middle node.
+
+Algorithm:
+Initialize: Set two pointers, slow and fast, both starting at the head of the linked list.
+
+Traverse: Loop while fast is not null and fast.next is not null:
+
+Move slow one step ahead (slow = slow.next).
+
+Move fast two steps ahead (fast = fast.next.next).
+
+Return: When fast reaches the end, slow will point to the middle node (or the second middle node for even-length lists). Return slow.
+
+Code:
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow = head
+        fast = head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        return slow
+
+Experiment 1.4 (Leetcode No 234)
+Aim: Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+Algorithm:
+Find the Middle: Use two pointers (slow moving 1 step, fast moving 2 steps). When fast reaches the end, slow will be at the middle node.
+
+Reverse the Second Half: Reverse the pointers of the second half of the linked list starting from slow.
+
+Compare Both Halves: Place one pointer at the original head and another at the head of the reversed second half. Advance both pointers one node at a time and compare values.
+
+Restore the List (Optional/Best Practice): Reverse the second half again to restore the linked list to its original state.
+
+Return Result: If all matched values are identical, return True; otherwise, return False.
+
+Code:
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        self.s = []
+        current = head
+        while current:
+            self.s.append(current.val)
+            current = current.next
+        current = head
+        while current:
+            if current.val != self.s[-1]:
+                return False
+            self.s.pop()
+            current = current.next
+        return True
